@@ -1,56 +1,147 @@
+
+* {
+  box-sizing: border-box;
+}
+
 body {
-  font-family: Georgia, serif;
-  max-width: 800px;
-  margin: 2rem auto;
-  padding: 0 1rem;
-  background: #f9f9f9;
-  color: #222;
+  min-height: 100vh;
+  margin: 0;
+  padding: 0;
+  font-family: "Palatino Linotype", "Book Antiqua", Palatino, serif;
+  background: #7ebee6;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  position: relative;
 }
 
-h1 {
-  text-align: center;
-  margin-bottom: 1rem;
+body::before,
+body::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
 }
 
-#generate-btn {
-  display: block;
-  margin: 0 auto 2rem;
-  padding: 0.75rem 1.2rem;
-  border: none;
-  border-radius: 6px;
-  background: #2d5b9f;
-  color: #fff;
-  font-size: 1rem;
-  cursor: pointer;
+body::before {
+  background:
+    radial-gradient(circle at 22% 38%, transparent 0 16px, rgba(205, 241, 255, 0.34) 17px 18px, transparent 19px 25px, rgba(205, 241, 255, 0.25) 26px 27px, transparent 28px 35px, rgba(205, 241, 255, 0.16) 36px 37px, transparent 38px),
+    radial-gradient(circle at 74% 64%, transparent 0 14px, rgba(205, 241, 255, 0.32) 15px 16px, transparent 17px 23px, rgba(205, 241, 255, 0.22) 24px 25px, transparent 26px 33px, rgba(205, 241, 255, 0.15) 34px 35px, transparent 36px);
+  animation: pond-ripple-a 7s ease-in-out infinite;
 }
 
-#generate-btn:hover {
-  background: #244a82;
+body::after {
+  background:
+    radial-gradient(circle at 35% 72%, transparent 0 12px, rgba(223, 248, 255, 0.26) 13px 14px, transparent 15px 21px, rgba(223, 248, 255, 0.18) 22px 23px, transparent 24px 30px, rgba(223, 248, 255, 0.12) 31px 32px, transparent 33px),
+    radial-gradient(circle at 82% 30%, transparent 0 10px, rgba(223, 248, 255, 0.22) 11px 12px, transparent 13px 18px, rgba(223, 248, 255, 0.15) 19px 20px, transparent 21px 27px, rgba(223, 248, 255, 0.1) 28px 29px, transparent 30px);
+  animation: pond-ripple-b 9s ease-in-out infinite;
+}
+
+body > * {
+  position: relative;
+  z-index: 1;
 }
 
 #quotes-container {
-  max-width: 720px;
-  margin: 0 auto;
-}
-
-.quote-card {
-  background: #fff;
-  border-left: 4px solid #555;
-  border-radius: 4px;
-  padding: 1rem 1.25rem;
-  margin-bottom: 1.25rem;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+  width: min(620px, 80vw);
+  min-height: 140px;
+  margin: 0;
+  margin-bottom: 0.5rem;
+  padding: 1.25rem 1.4rem;
+  background: transparent;
+  border: 0;
+  box-shadow: none;
 }
 
 .quote-text {
-  margin: 0 0 0.5rem;
+  margin: 0 0 1rem;
+  color: #0f4f78;
+  font-size: clamp(1.15rem, 1.3vw + 0.7rem, 1.7rem);
+  line-height: 1.65;
+  text-align: center;
   font-style: italic;
-  line-height: 1.6;
+  font-family: "Palatino Linotype", "Book Antiqua", Palatino, serif;
+  text-shadow: 0 1px 1px rgba(235, 249, 255, 0.95);
+  animation: sine-wave 30s linear infinite;
 }
 
 .quote-author {
   margin: 0;
-  font-weight: bold;
+  color: #1f6d9f;
+  font-size: clamp(1rem, 1vw + 0.6rem, 1.25rem);
   text-align: right;
-  color: #555;
+  font-weight: 600;
+  font-family: "Palatino Linotype", "Book Antiqua", Palatino, serif;
+  text-shadow: 0 1px 1px rgba(235, 249, 255, 0.95);
+  animation: sine-wave 30s linear infinite;
+  animation-delay: -15s;
+}
+
+#generate-btn {
+  margin: 0;
+  margin-top: 0;
+  padding: 0.8rem 2rem;
+  border: 0;
+  border-radius: 999px;
+  background: linear-gradient(180deg, #c7eaff 0%, #88c4ea 100%);
+  color: #1a5e89;
+  font-size: 1.2rem;
+  font-family: "Palatino Linotype", "Book Antiqua", Palatino, serif;
+  letter-spacing: 0.03em;
+  box-shadow: 0 8px 20px rgba(23, 80, 119, 0.22);
+  cursor: pointer;
+}
+
+#generate-btn:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 10px 24px rgba(23, 80, 119, 0.3);
+}
+
+@keyframes sine-wave {
+  0%,
+  100% {
+    transform: translateY(0px);
+  }
+  25% {
+    transform: translateY(-3px);
+  }
+  50% {
+    transform: translateY(0px);
+  }
+  75% {
+    transform: translateY(3px);
+  }
+}
+
+@keyframes pond-ripple-a {
+  0%,
+  100% {
+    opacity: 0.45;
+  }
+  50% {
+    opacity: 0.8;
+  }
+}
+
+@keyframes pond-ripple-b {
+  0%,
+  100% {
+    opacity: 0.3;
+  }
+  50% {
+    opacity: 0.62;
+  }
+}
+
+@media (max-width: 900px) {
+  #quotes-container {
+    width: min(90vw, 560px);
+  }
+
+  #generate-btn {
+    margin-top: 0.25rem;
+  }
 }

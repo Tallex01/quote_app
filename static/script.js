@@ -1,6 +1,7 @@
-async function loadRandomQuote() {
-  const container = document.getElementById("quotes-container");
+const container = document.getElementById("quotes-container");
+const generateButton = document.getElementById("generate-btn");
 
+async function loadRandomQuote() {
   try {
     const response = await fetch("/get_pair");
     if (!response.ok) throw new Error(`HTTP error: ${response.status}`);
@@ -8,9 +9,6 @@ async function loadRandomQuote() {
     const { Quote: quote, Author: author } = await response.json();
 
     container.innerHTML = "";
-
-    const card = document.createElement("div");
-    card.className = "quote-card";
 
     const quoteText = document.createElement("p");
     quoteText.className = "quote-text";
@@ -20,13 +18,10 @@ async function loadRandomQuote() {
     authorText.className = "quote-author";
     authorText.textContent = `— ${author}`;
 
-    card.appendChild(quoteText);
-    card.appendChild(authorText);
-    container.appendChild(card);
+    container.appendChild(quoteText);
+    container.appendChild(authorText);
   } catch (err) {
     container.textContent = `Failed to load quote: ${err.message}`;
   }
 }
-
-const generateButton = document.getElementById("generate-btn");
 generateButton.addEventListener("click", loadRandomQuote);
